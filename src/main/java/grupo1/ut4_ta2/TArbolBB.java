@@ -10,15 +10,24 @@ package grupo1.ut4_ta2;
  * @param <T>
  */
 public class TArbolBB<T> implements IArbolBB<T> {
-
-    @Override
-    public boolean insertar(TElementoAB<T> unElemento) {
-        
+    
+    TElementoAB<T> raiz;
+    
+    public TArbolBB(TElementoAB<T> raiz){
+       this.raiz = raiz;
     }
 
     @Override
-    public TElementoAB<T> buscar(Comparable unaEtiqueta) {
+    public boolean insertar(TElementoAB<T> unElemento) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Tupla<TElementoAB<T>, Integer> buscar(Comparable unaEtiqueta) {
+        if (raiz != null) {
+            return raiz.buscar(unaEtiqueta);
+        }
+        return null;
     }
 
     @Override
@@ -28,12 +37,18 @@ public class TArbolBB<T> implements IArbolBB<T> {
 
     @Override
     public String inOrden() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (this.raiz != null) {
+            return this.raiz.inOrden();
+        }
+        return "";
     }
 
     @Override
     public String postOrden() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (this.raiz != null) {
+            return this.raiz.postOrden();
+        }
+        return "";
     }
 
     @Override
