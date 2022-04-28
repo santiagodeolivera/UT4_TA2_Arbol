@@ -68,9 +68,23 @@ public class TElementoAB<T> implements IElementoAB<T> {
 
     @Override
     public boolean insertar(TElementoAB<T> elemento) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(this.getEtiqueta().compareTo(elemento.getEtiqueta())<0)
+        {
+            if(this.der == null) {
+                this.der = elemento;
+            } else {
+                this.der.insertar(elemento);     
+            }
+        } else {
+            if(this.izq == null) {
+                this.izq = elemento;
+            } else {
+                this.izq.insertar(elemento);                    
+            }
+        }    
+        return true;
     }
-
+    
     @Override
     public String preOrden() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

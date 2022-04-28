@@ -17,9 +17,21 @@ public class TArbolBB<T> implements IArbolBB<T> {
        this.raiz = raiz;
     }
 
+    public TElementoAB<T> raiz;
+    public static int contadorElementosInsertados = 0;
+    
     @Override
     public boolean insertar(TElementoAB<T> unElemento) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(raiz == null)
+        {
+            raiz = unElemento;
+        }
+        else
+        {
+            raiz.insertar(unElemento);
+        }
+        contadorElementosInsertados++;
+        return true;
     }
 
     @Override
@@ -55,5 +67,6 @@ public class TArbolBB<T> implements IArbolBB<T> {
     public void eliminar(Comparable unaEtiqueta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
 
 }

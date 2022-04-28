@@ -14,14 +14,6 @@ import ut5.ta2.ManejadorArchivosGenerico;
 public class UT4_TA2 {
 
     public static void main(String[] args) {
-        IArbolBB<Integer> arbol = new TArbolBB<Integer>(
-                new TElementoAB<Integer>(4292,
-                        new TElementoAB<Integer>(356, null, null),
-                        new TElementoAB<Integer>(5000, null, 
-                                new TElementoAB<>(10903, null, null)
-                        )
-                )
-        );
         
         System.out.println(arbol.inOrden());
         
