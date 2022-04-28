@@ -9,15 +9,14 @@ package grupo1.ut4_ta2;
  * @author santi
  */
 public class TElementoAB<T> implements IElementoAB<T> {
+    private Comparable etiqueta;
+    private TElementoAB<T> hijoIzq;
+    private TElementoAB<T> hijoDer;
 
-    public Comparable etiqueta;
-    public T dato;
-    public TElementoAB<T> izq;
-    public TElementoAB<T> der;
-        
-    public TElementoAB(Comparable etiqueta, T dato) {
+    public TElementoAB (Comparable etiqueta, TElementoAB<T> hijoIzq, TElementoAB<T> hijoDer){
         this.etiqueta = etiqueta;
-        this.dato = dato;
+        this.hijoIzq = hijoIzq;
+        this.hijoDer = hijoDer;
     }
     
     @Override
@@ -46,8 +45,25 @@ public class TElementoAB<T> implements IElementoAB<T> {
     }
 
     @Override
-    public TElementoAB<T> buscar(Comparable unaEtiqueta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Tupla<TElementoAB<T>, Integer> buscar(Comparable unaEtiqueta) {
+        return this.buscar(unaEtiqueta, 0);
+    }
+        
+    private Tupla<TElementoAB<T>, Integer> buscar(Comparable unaEtiqueta, int prof) {
+        int comp = this.etiqueta.compareTo(unaEtiqueta);
+        if (comp < 0) {
+            if (this.hijoDer == null) {
+                return null;
+            }
+            return this.hijoDer.buscar(unaEtiqueta, prof + 1);
+        } else if (comp > 0) {
+            if (this.hijoIzq == null) {
+                return null;
+            }
+            return this.hijoIzq.buscar(unaEtiqueta, prof + 1);
+        } else {
+            return new Tupla<>(this, prof);
+        }
     }
 
     @Override
@@ -76,12 +92,36 @@ public class TElementoAB<T> implements IElementoAB<T> {
 
     @Override
     public String inOrden() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String izqStr = "";
+        if (this.hijoIzq != null) {
+            izqStr = this.hijoIzq.inOrden() + ", ";
+        }
+        
+        String thisValue = this.getEtiqueta().toString();
+        
+        String derStr = "";
+        if (this.hijoDer != null) {
+            derStr = ", " + this.hijoDer.inOrden();
+        }
+        
+        return izqStr + thisValue + derStr;
     }
 
     @Override
     public String postOrden() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String izqStr = "";
+        if (this.hijoIzq != null) {
+            izqStr = this.hijoIzq.postOrden() + ", ";
+        }
+        
+        String derStr = "";
+        if (this.hijoDer != null) {
+            derStr = this.hijoDer.postOrden() + ", ";
+        }
+        
+        String thisValue = this.getEtiqueta().toString();
+        
+        return izqStr + derStr + thisValue;
     }
 
     @Override

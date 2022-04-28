@@ -44,7 +44,7 @@ public interface IElementoAB<T> {
      * @param unaEtiqueta del nodo a buscar
      * @return Elemento encontrado. En caso de no encontrarlo, retorna nulo.
      */
-    public TElementoAB<T> buscar(Comparable unaEtiqueta);
+    public Tupla<TElementoAB<T>, Integer> buscar(Comparable unaEtiqueta);
 
  
 

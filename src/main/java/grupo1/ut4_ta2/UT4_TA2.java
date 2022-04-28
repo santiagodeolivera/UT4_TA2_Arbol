@@ -14,23 +14,19 @@ import ut5.ta2.ManejadorArchivosGenerico;
 public class UT4_TA2 {
 
     public static void main(String[] args) {
-        String[] lineas = ManejadorArchivosGenerico.leerArchivo("src/claves1.txt");
-        IArbolBB<String> arbol = new TArbolBB();
         
-        String cadena = "";
+        System.out.println(arbol.inOrden());
         
-        for(String linea : lineas) {
-            IElementoAB<String> elemento = new TElementoAB(linea, linea);
-            arbol.insertar((TElementoAB)elemento);
+        /*
+        String[] claves = ManejadorArchivosGenerico.leerArchivo("consultaPrueba.txt");
+        String[] lineas = new String[claves.length];
+        int lineasLen = 0;
+        for(String clave : claves) {
+            int claveNum = Integer.parseInt(clave);
+            var res = arbol.buscar(claveNum);
+            lineas[lineasLen++] = res == null ? "null" : (res.primero.getEtiqueta() + ", " + res.segundo);
         }
-        String[] lineasEscribir = new String[TArbolBB.contadorElementosInsertados];
-
-        int i = 0;
-        for(String linea : lineas) {
-            lineasEscribir[i] = linea + " " + TArbolBB.contadorElementosInsertados;
-            i++;
-        }
-        
-        ManejadorArchivosGenerico.escribirArchivo("src/escritura.txt", lineasEscribir);
+        ManejadorArchivosGenerico.escribirArchivo("r.txt", lineas);
+        */
     }
 }
