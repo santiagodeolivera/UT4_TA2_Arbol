@@ -10,9 +10,19 @@ package grupo1.ut4_ta2;
  */
 public class TElementoAB<T> implements IElementoAB<T> {
 
+    public Comparable etiqueta;
+    public T dato;
+    public TElementoAB<T> izq;
+    public TElementoAB<T> der;
+        
+    public TElementoAB(Comparable etiqueta, T dato) {
+        this.etiqueta = etiqueta;
+        this.dato = dato;
+    }
+    
     @Override
     public Comparable getEtiqueta() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.etiqueta;
     }
 
     @Override
@@ -42,9 +52,23 @@ public class TElementoAB<T> implements IElementoAB<T> {
 
     @Override
     public boolean insertar(TElementoAB<T> elemento) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(this.getEtiqueta().compareTo(elemento.getEtiqueta())<0)
+        {
+            if(this.der == null) {
+                this.der = elemento;
+            } else {
+                this.der.insertar(elemento);     
+            }
+        } else {
+            if(this.izq == null) {
+                this.izq = elemento;
+            } else {
+                this.izq.insertar(elemento);                    
+            }
+        }    
+        return true;
     }
-
+    
     @Override
     public String preOrden() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

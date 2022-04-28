@@ -11,9 +11,21 @@ package grupo1.ut4_ta2;
  */
 public class TArbolBB<T> implements IArbolBB<T> {
 
+    public TElementoAB<T> raiz;
+    public static int contadorElementosInsertados = 0;
+    
     @Override
     public boolean insertar(TElementoAB<T> unElemento) {
-        
+        if(raiz == null)
+        {
+            raiz = unElemento;
+        }
+        else
+        {
+            raiz.insertar(unElemento);
+        }
+        contadorElementosInsertados++;
+        return true;
     }
 
     @Override
@@ -40,5 +52,6 @@ public class TArbolBB<T> implements IArbolBB<T> {
     public void eliminar(Comparable unaEtiqueta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
 
 }

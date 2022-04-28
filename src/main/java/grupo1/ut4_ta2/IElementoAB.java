@@ -2,6 +2,7 @@ package grupo1.ut4_ta2;
 
 public interface IElementoAB<T> {
 
+   
     /**
      * Obtiene el valor de la etiqueta del nodo.
      *
