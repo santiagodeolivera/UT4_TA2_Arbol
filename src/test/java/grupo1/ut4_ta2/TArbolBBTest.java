@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import ut5.ta2.ManejadorArchivosGenerico;
 
 /**
  *
@@ -36,31 +37,23 @@ public class TArbolBBTest {
     public void tearDown() {
     }
     
-    /**
-     * Test de búsqueda de elementos en un árbol binario.
-     * Tenemos un elemento que está en el árbol, verificar si está en el árbol.
-     */
     @Test
-    public void testBuscar() {
+    public void testInsertar() {
+        int[] numClaves;
+        {
+            String[] claves = ManejadorArchivosGenerico.leerArchivo("clavesPrueba.txt");
+            numClaves = new int[claves.length];
+            for(int i = 0; i < claves.length; i++) {
+                numClaves[i] = Integer.parseInt(claves[i]);
+            }
+        }
         
+        var arbol = new TArbolBB<Integer>();
+        for (int clave : numClaves) {
+            arbol.insertar(new TElementoAB<>(clave, clave));
+        }
+        for (int clave : numClaves) {
+            assertEquals(clave, arbol.buscar(clave).primero.getDatos());
+        }
     }
-
-    /**
-     * Test de iteración de elementos de un árbol binario en pre-orden.
-     * Comparar el resultado de la iteración con un resultado esperado.
-     */
-    @Test
-    public void testPreOrden() {
-        
-    }
-    
-    /**
-     * Test de iteración de elementos de un árbol binario en in-orden.
-     * Comparar el resultado de la iteración con un resultado esperado.
-     */
-    @Test
-    public void testInOrden() {
-        
-    }
-
 }

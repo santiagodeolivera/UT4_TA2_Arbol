@@ -10,13 +10,15 @@ package grupo1.ut4_ta2;
  */
 public class TElementoAB<T> implements IElementoAB<T> {
     private Comparable etiqueta;
+    private T datos;
     private TElementoAB<T> hijoIzq;
     private TElementoAB<T> hijoDer;
 
-    public TElementoAB (Comparable etiqueta, TElementoAB<T> hijoIzq, TElementoAB<T> hijoDer){
+    public TElementoAB (Comparable etiqueta, T datos) {
         this.etiqueta = etiqueta;
-        this.hijoIzq = hijoIzq;
-        this.hijoDer = hijoDer;
+        this.datos = datos;
+        this.hijoIzq = null;
+        this.hijoDer = null;
     }
     
     @Override
@@ -26,22 +28,22 @@ public class TElementoAB<T> implements IElementoAB<T> {
 
     @Override
     public TElementoAB<T> getHijoIzq() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.hijoIzq;
     }
 
     @Override
     public TElementoAB<T> getHijoDer() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.hijoDer;
     }
 
     @Override
     public void setHijoIzq(TElementoAB<T> elemento) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.hijoIzq = elemento;
     }
 
     @Override
     public void setHijoDer(TElementoAB<T> elemento) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.hijoDer = elemento;
     }
 
     @Override
@@ -65,24 +67,31 @@ public class TElementoAB<T> implements IElementoAB<T> {
             return new Tupla<>(this, prof);
         }
     }
-
+    
     @Override
-    public boolean insertar(TElementoAB<T> elemento) {
-        if(this.getEtiqueta().compareTo(elemento.getEtiqueta())<0)
+    public Tupla<Boolean, Integer> insertar(TElementoAB<T> elemento) {
+        int comp = this.getEtiqueta().compareTo(elemento.getEtiqueta());
+        if (comp < 0)
         {
-            if(this.der == null) {
-                this.der = elemento;
+            if(this.hijoDer == null) {
+                this.hijoDer = elemento;
+                return new Tupla<>(true, 0);
             } else {
-                this.der.insertar(elemento);     
+                var res = this.hijoDer.insertar(elemento);
+                res.segundo++;
+                return res;
             }
-        } else {
-            if(this.izq == null) {
-                this.izq = elemento;
+        } else if (comp > 0) {
+            if(this.hijoIzq == null) {
+                this.hijoIzq = elemento;
+                return new Tupla<>(true, 0);
             } else {
-                this.izq.insertar(elemento);                    
+                var res = this.hijoIzq.insertar(elemento);
+                res.segundo++;
+                return res;
             }
         }    
-        return true;
+        return new Tupla<>(false, 0);
     }
     
     @Override
@@ -126,7 +135,7 @@ public class TElementoAB<T> implements IElementoAB<T> {
 
     @Override
     public T getDatos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.datos;
     }
 
     @Override

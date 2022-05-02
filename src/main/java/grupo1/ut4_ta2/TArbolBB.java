@@ -11,15 +11,12 @@ package grupo1.ut4_ta2;
  */
 public class TArbolBB<T> implements IArbolBB<T> {
     
-    TElementoAB<T> raiz;
+    private TElementoAB<T> raiz;
     
-    public TArbolBB(TElementoAB<T> raiz){
-       this.raiz = raiz;
+    public TArbolBB(){
+       this.raiz = null;
     }
 
-    public TElementoAB<T> raiz;
-    public static int contadorElementosInsertados = 0;
-    
     @Override
     public boolean insertar(TElementoAB<T> unElemento) {
         if(raiz == null)
@@ -30,7 +27,6 @@ public class TArbolBB<T> implements IArbolBB<T> {
         {
             raiz.insertar(unElemento);
         }
-        contadorElementosInsertados++;
         return true;
     }
 

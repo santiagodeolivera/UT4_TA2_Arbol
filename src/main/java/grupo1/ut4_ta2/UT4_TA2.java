@@ -14,9 +14,6 @@ import ut5.ta2.ManejadorArchivosGenerico;
 public class UT4_TA2 {
 
     public static void main(String[] args) {
-        
-        System.out.println(arbol.inOrden());
-        
         /*
         String[] claves = ManejadorArchivosGenerico.leerArchivo("consultaPrueba.txt");
         String[] lineas = new String[claves.length];
