@@ -75,7 +75,7 @@ public class TElementoAB<T> implements IElementoAB<T> {
         {
             if(this.hijoDer == null) {
                 this.hijoDer = elemento;
-                return new Tupla<>(true, 0);
+                return new Tupla<>(true, 1);
             } else {
                 var res = this.hijoDer.insertar(elemento);
                 res.segundo++;
@@ -84,7 +84,7 @@ public class TElementoAB<T> implements IElementoAB<T> {
         } else if (comp > 0) {
             if(this.hijoIzq == null) {
                 this.hijoIzq = elemento;
-                return new Tupla<>(true, 0);
+                return new Tupla<>(true, 1);
             } else {
                 var res = this.hijoIzq.insertar(elemento);
                 res.segundo++;
@@ -96,7 +96,19 @@ public class TElementoAB<T> implements IElementoAB<T> {
     
     @Override
     public String preOrden() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String thisValue = this.getEtiqueta().toString();
+        
+        String izqStr = "";
+        if (this.hijoIzq != null) {
+            izqStr = ", " + this.hijoIzq.preOrden();
+        }
+        
+        String derStr = "";
+        if (this.hijoDer != null) {
+            derStr = ", " + this.hijoDer.preOrden();
+        }
+        
+        return thisValue + izqStr + derStr;
     }
 
     @Override
@@ -141,6 +153,74 @@ public class TElementoAB<T> implements IElementoAB<T> {
     @Override
     public TElementoAB eliminar(Comparable unaEtiqueta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public int altura() {
+        int altIzq = -1;
+        int altDer = -1;
+        
+        if (this.hijoIzq != null) {
+            altIzq = this.hijoIzq.altura();
+        }
+        if (this.hijoDer != null) {
+            altDer = this.hijoDer.altura();
+        }
+        
+        return Math.max(altIzq, altDer) + 1;
+    }
+    
+    public int tamanio() {
+        int res = 1;
+        
+        if (this.hijoIzq != null) {
+            res += this.hijoIzq.tamanio();
+        }
+        if (this.hijoDer != null) {
+            res += this.hijoDer.tamanio();
+        }
+        
+        return res;
+    }
+    
+    public int cantHojas() {
+        if (this.hijoIzq == null && this.hijoDer == null) {
+            return 1;
+        }
+        
+        int res = 0;
+        if (this.hijoIzq != null) {
+            res = this.hijoIzq.cantHojas();
+        }
+        if (this.hijoDer != null) {
+            res += this.hijoDer.cantHojas();
+        }
+        return res;
+    }
+    
+    public int sumOneIfNotNeg1(int n) {
+        if (n < 0) {
+            return n + 1;
+        }
+        return -1;
+    }
+    
+    public int nivelDe(Comparable etiqueta) {
+        int comp = etiqueta.compareTo(this.getEtiqueta());
+        if (comp < 0) {
+            if (this.hijoIzq != null) {
+                return sumOneIfNotNeg1(this.hijoIzq.nivelDe(etiqueta));
+            } else {
+                return -1;
+            }
+        } else if (comp > 0) {
+            if (this.hijoDer != null) {
+                return sumOneIfNotNeg1(this.hijoDer.nivelDe(etiqueta));
+            } else {
+                return -1;
+            }
+        } else {
+            return 0;
+        }
     }
 
 }
