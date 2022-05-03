@@ -111,8 +111,34 @@ public class TArbolBBTest {
     }
     
     @Test
-    public void testTamanio() {
-        
+    public void testTamanioVacio() {
+	var arbol = new TArbolBB<Object>();
+
+	var tamanio = arbol.tamanio();
+
+	assertEquals(0, tamanio);
+    }
+
+    @Test
+    public void testTamanioConRaiz() {
+        var raiz = new TElementoAB<>(1, 1);
+	var arbol = new TArbolBB<Integer>(raiz);
+
+	var tamanio = arbol.tamanio();
+
+	assertEquals(1, tamanio);
+    }
+
+    @Test
+    public void testTamanioConRaizEHijoIzquierdo() {
+        var hijoIzq = new TElementoAB<>(0, 0);
+        var raiz = new TElementoAB<>(1, 1);
+        raiz.setHijoIzq(hijoIzq);
+	var arbol = new TArbolBB<Integer>(raiz);
+
+	var tamanio = arbol.tamanio();
+
+	assertEquals(2, tamanio);
     }
 
     @Test
