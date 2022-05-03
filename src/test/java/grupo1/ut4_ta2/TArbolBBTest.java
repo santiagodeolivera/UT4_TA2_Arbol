@@ -109,5 +109,15 @@ public class TArbolBBTest {
         
         assertEquals("2, 3, 4, 5, 6", orden);
     }
+    
+    @Test
+    public void testTamanio() {
+        
+    }
+
+    @Test
+    public void testAltura() {
+        
+    }
 
 }
