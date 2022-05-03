@@ -116,8 +116,74 @@ public class TArbolBBTest {
     }
 
     @Test
-    public void testAltura() {
+    public void testAlturaArbolVacio (){
+        TArbolBB arbol = new TArbolBB<Integer> ();
         
+        int alt = arbol.altura();
+        
+        assertEquals(-1,alt);
+    }
+    
+    
+    @Test
+    public void testAlturaUnElemento(){
+        TArbolBB arbol = new TArbolBB<Integer> ();
+        arbol.insertar(new TElementoAB(1,1));
+        int alt = arbol.altura();
+        
+        assertEquals(0,alt);
     }
 
+    @Test
+    public void testAltura5Elementos(){
+        TArbolBB arbol = new TArbolBB<Integer> ();
+
+        TElementoAB el = new TElementoAB(2,2);    
+        arbol.raiz = el;
+        TElementoAB el1 = new TElementoAB(1,1); 
+        el.setHijoIzq(el1);
+        TElementoAB el4 = new TElementoAB(4,4);
+        el.setHijoDer(el4);
+        TElementoAB el5 = new TElementoAB(5,5); 
+        el4.setHijoDer(el5);
+        TElementoAB el6 = new TElementoAB(6,6); 
+        el5.setHijoDer(el6);
+        
+        int alt = arbol.altura();
+        
+        assertEquals(3,alt);
+    }
+    
+    @Test
+    public void testAlturaNoCambia(){
+        TArbolBB arbol = new TArbolBB<Integer> ();
+
+        TElementoAB el = new TElementoAB(2,2);    
+        arbol.raiz = el;
+        TElementoAB el1 = new TElementoAB(1,1); 
+        el.setHijoIzq(el1);
+        TElementoAB el4 = new TElementoAB(4,4);
+        el.setHijoDer(el4);
+        TElementoAB el5 = new TElementoAB(5,5); 
+        el4.setHijoDer(el5);
+        TElementoAB el6 = new TElementoAB(6,6); 
+        el5.setHijoDer(el6);
+        
+        String preOrdenPreAltura = arbol.preOrden();
+        String postOrdenPreAltura = arbol.postOrden();
+        String inOrdenPreAltura = arbol.inOrden();
+        
+        
+        arbol.altura();
+        
+        String preOrdenPostAltura = arbol.preOrden();
+        String postOrdenPostAltura = arbol.postOrden();
+        String inOrdenPostAltura = arbol.inOrden();
+        
+        assertEquals(preOrdenPostAltura,preOrdenPreAltura);
+        assertEquals(postOrdenPostAltura,postOrdenPreAltura);
+        assertEquals(inOrdenPostAltura,inOrdenPreAltura);
+    }
+    
+    
 }
