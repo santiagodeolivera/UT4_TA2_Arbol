@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import ut5.ta2.ManejadorArchivosGenerico;
 
 /**
  *
@@ -36,31 +37,153 @@ public class TArbolBBTest {
     public void tearDown() {
     }
     
-    /**
-     * Test de búsqueda de elementos en un árbol binario.
-     * Tenemos un elemento que está en el árbol, verificar si está en el árbol.
-     */
     @Test
-    public void testBuscar() {
+    public void testInsertar() {
+        int[] numClaves;
+        {
+            String[] claves = ManejadorArchivosGenerico.leerArchivo("clavesPrueba.txt");
+            numClaves = new int[claves.length];
+            for(int i = 0; i < claves.length; i++) {
+                numClaves[i] = Integer.parseInt(claves[i]);
+            }
+        }
         
-    }
-
-    /**
-     * Test de iteración de elementos de un árbol binario en pre-orden.
-     * Comparar el resultado de la iteración con un resultado esperado.
-     */
-    @Test
-    public void testPreOrden() {
-        
+        var arbol = new TArbolBB<Integer>();
+        for (int clave : numClaves) {
+            arbol.insertar(new TElementoAB<>(clave, clave));
+        }
+        for (int clave : numClaves) {
+            assertEquals(clave, arbol.buscar(clave).primero.getDatos());
+        }
     }
     
-    /**
-     * Test de iteración de elementos de un árbol binario en in-orden.
-     * Comparar el resultado de la iteración con un resultado esperado.
-     */
     @Test
-    public void testInOrden() {
+    public void testVacioInOrden() {
+        var arbol = new TArbolBB<Object>();
+        
+        var orden = arbol.inOrden();
+        
+        assertEquals("", orden);
+    }
+    
+    @Test
+    public void testInOrdenWithOneElement() {
+        var arbol = new TArbolBB<Integer>(new TElementoAB<>(1, 1));
+        
+        var orden = arbol.inOrden();
+        
+        assertEquals("1", orden);
+    }
+    
+    @Test
+    public void testInOrdenWithElementInLeft() {
+        var el = new TElementoAB<Integer>(5, 5);
+        el.setHijoIzq(new TElementoAB<>(2, 2));
+        var arbol = new TArbolBB<Integer>(el);
+        
+        var orden = arbol.inOrden();
+        
+        assertEquals("2, 5", orden);
+    }
+
+    @Test
+    public void testInOrdenWithElementInRight() {
+        var el = new TElementoAB<Integer>(2, 2);
+        el.setHijoDer(new TElementoAB<>(5, 5));
+        var arbol = new TArbolBB<Integer>(el);
+        
+        var orden = arbol.inOrden();
+        
+        assertEquals("2, 5", orden);
+    }
+
+    @Test
+    public void testInOrdenWithFiveElements() {
+        var arbol = new TArbolBB<Integer>();
+        
+        for (int i : new int[] {5, 2, 6, 3, 4}) {
+            arbol.insertar(new TElementoAB<>(i, i));
+        }
+        
+        var orden = arbol.inOrden();
+        
+        assertEquals("2, 3, 4, 5, 6", orden);
+    }
+    
+    @Test
+    public void testTamanio() {
         
     }
 
+    @Test
+    public void testAlturaArbolVacio (){
+        TArbolBB arbol = new TArbolBB<Integer> ();
+        
+        int alt = arbol.altura();
+        
+        assertEquals(-1,alt);
+    }
+    
+    
+    @Test
+    public void testAlturaUnElemento(){
+        TArbolBB arbol = new TArbolBB<Integer> ();
+        arbol.insertar(new TElementoAB(1,1));
+        int alt = arbol.altura();
+        
+        assertEquals(0,alt);
+    }
+
+    @Test
+    public void testAltura5Elementos(){
+        TArbolBB arbol = new TArbolBB<Integer> ();
+
+        TElementoAB el = new TElementoAB(2,2);    
+        arbol.raiz = el;
+        TElementoAB el1 = new TElementoAB(1,1); 
+        el.setHijoIzq(el1);
+        TElementoAB el4 = new TElementoAB(4,4);
+        el.setHijoDer(el4);
+        TElementoAB el5 = new TElementoAB(5,5); 
+        el4.setHijoDer(el5);
+        TElementoAB el6 = new TElementoAB(6,6); 
+        el5.setHijoDer(el6);
+        
+        int alt = arbol.altura();
+        
+        assertEquals(3,alt);
+    }
+    
+    @Test
+    public void testAlturaNoCambia(){
+        TArbolBB arbol = new TArbolBB<Integer> ();
+
+        TElementoAB el = new TElementoAB(2,2);    
+        arbol.raiz = el;
+        TElementoAB el1 = new TElementoAB(1,1); 
+        el.setHijoIzq(el1);
+        TElementoAB el4 = new TElementoAB(4,4);
+        el.setHijoDer(el4);
+        TElementoAB el5 = new TElementoAB(5,5); 
+        el4.setHijoDer(el5);
+        TElementoAB el6 = new TElementoAB(6,6); 
+        el5.setHijoDer(el6);
+        
+        String preOrdenPreAltura = arbol.preOrden();
+        String postOrdenPreAltura = arbol.postOrden();
+        String inOrdenPreAltura = arbol.inOrden();
+        
+        
+        arbol.altura();
+        
+        String preOrdenPostAltura = arbol.preOrden();
+        String postOrdenPostAltura = arbol.postOrden();
+        String inOrdenPostAltura = arbol.inOrden();
+        
+        assertEquals(preOrdenPostAltura,preOrdenPreAltura);
+        assertEquals(postOrdenPostAltura,postOrdenPreAltura);
+        assertEquals(inOrdenPostAltura,inOrdenPreAltura);
+    }
+    
+    
 }

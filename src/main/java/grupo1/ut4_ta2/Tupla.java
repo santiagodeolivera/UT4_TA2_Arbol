@@ -7,6 +7,8 @@ package grupo1.ut4_ta2;
 /**
  *
  * @author santi
+ * @param <T>
+ * @param <U>
  */
 public class Tupla<T, U> {
     public T primero;

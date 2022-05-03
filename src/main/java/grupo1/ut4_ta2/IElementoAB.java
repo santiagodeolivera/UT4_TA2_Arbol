@@ -54,7 +54,7 @@ public interface IElementoAB<T> {
      * @param elemento Elemento a insertar.
      * @return Exito de la operaci�n.
      */
-    public boolean insertar(TElementoAB<T> elemento);
+    public Tupla<Boolean, Integer> insertar(TElementoAB<T> elemento);
 
     /**
      * Imprime en preorden el arbol separado por guiones.
@@ -90,5 +90,9 @@ public interface IElementoAB<T> {
      * @return 
      */
     public TElementoAB eliminar(Comparable unaEtiqueta);
+    
+    public int altura();
+    
+    public int tamanio();
 
 }

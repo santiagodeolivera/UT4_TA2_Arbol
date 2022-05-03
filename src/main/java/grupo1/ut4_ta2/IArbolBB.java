@@ -10,7 +10,7 @@ public interface IArbolBB<T> {
      * @return Exito de la operacián
      */
 
-    public boolean insertar(TElementoAB<T> unElemento);
+    public Tupla<Boolean, Integer> insertar(TElementoAB<T> unElemento);
 
  
 
@@ -52,6 +52,9 @@ public interface IArbolBB<T> {
      */
     public void eliminar(Comparable unaEtiqueta);
 
+    public int altura();
+    
+    public int tamanio();
 	
 	
 }
