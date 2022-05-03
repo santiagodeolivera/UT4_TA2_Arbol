@@ -21,6 +21,13 @@ public class TElementoAB<T> implements IElementoAB<T> {
         this.hijoDer = null;
     }
     
+    public TElementoAB (Comparable etiqueta, T datos, TElementoAB<T> hijoIzq, TElementoAB<T> hijoDer) {
+        this.etiqueta = etiqueta;
+        this.datos = datos;
+        this.hijoIzq = hijoIzq;
+        this.hijoDer = hijoDer;
+    }
+    
     @Override
     public Comparable getEtiqueta() {
         return this.etiqueta;

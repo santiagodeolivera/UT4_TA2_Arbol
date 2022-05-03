@@ -11,6 +11,15 @@ package grupo1.ut4_ta2;
  */
 public class TArbolBB<T> extends TDAArbol<T> implements IArbolBB<T> {
     
+    public TArbolBB() {
+        super();
+    }
+    
+    public TArbolBB(TElementoAB raiz) {
+        super();
+        this.raiz = raiz;
+    }
+    
     /**
      * Intenta insertar un elemento en el árbol,
      * imprimiendo la cantidad de llamadas recursivas para ello.
