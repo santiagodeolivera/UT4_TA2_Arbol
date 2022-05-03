@@ -82,7 +82,10 @@ public class TArbolBB<T> extends TDAArbol<T> implements IArbolBB<T> {
 
     @Override
     public void eliminar(Comparable unaEtiqueta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (raiz == null) {
+            return;
+        }
+        raiz = raiz.eliminar(unaEtiqueta);
     }
     
     @Override

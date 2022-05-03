@@ -158,8 +158,35 @@ public class TElementoAB<T> implements IElementoAB<T> {
     }
 
     @Override
-    public TElementoAB eliminar(Comparable unaEtiqueta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public TElementoAB<T> eliminar(Comparable unaEtiqueta) {
+        int comp = unaEtiqueta.compareTo(this.etiqueta);
+        if (comp < 0) {
+            if (hijoIzq != null) {
+                this.hijoIzq = this.hijoIzq.eliminar(unaEtiqueta);
+            }
+            return this;
+        } else if (comp > 0) {
+            if (hijoDer != null) {
+                this.hijoDer = this.hijoDer.eliminar(unaEtiqueta);
+            }
+            return this;
+        } else if (hijoIzq == null) {
+            return hijoDer;
+        } else if (hijoDer == null) {
+            return hijoIzq;
+        } else {
+            TElementoAB<T> padre = this, hijo = hijoIzq;
+            while (hijo.getHijoDer() != null) {
+                padre = hijo;
+                hijo = hijo.getHijoDer();
+            }
+            if (padre != this) {
+                padre.hijoDer = hijo.hijoIzq;
+                hijo.hijoIzq = this.hijoIzq;
+            }
+            hijo.hijoDer = this.hijoDer;
+            return hijo;
+        }
     }
     
     @Override

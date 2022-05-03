@@ -89,7 +89,7 @@ public interface IElementoAB<T> {
      * @param unaEtiqueta
      * @return 
      */
-    public TElementoAB eliminar(Comparable unaEtiqueta);
+    public TElementoAB<T> eliminar(Comparable unaEtiqueta);
     
     public int altura();
     
