@@ -162,6 +162,7 @@ public class TElementoAB<T> implements IElementoAB<T> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+    @Override
     public int altura() {
         int altIzq = -1;
         int altDer = -1;
@@ -176,6 +177,7 @@ public class TElementoAB<T> implements IElementoAB<T> {
         return Math.max(altIzq, altDer) + 1;
     }
     
+    @Override
     public int tamanio() {
         int res = 1;
         

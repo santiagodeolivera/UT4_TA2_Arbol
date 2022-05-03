@@ -52,6 +52,9 @@ public interface IArbolBB<T> {
      */
     public void eliminar(Comparable unaEtiqueta);
 
+    public int altura();
+    
+    public int tamanio();
 	
 	
 }

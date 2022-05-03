@@ -90,5 +90,9 @@ public interface IElementoAB<T> {
      * @return 
      */
     public TElementoAB eliminar(Comparable unaEtiqueta);
+    
+    public int altura();
+    
+    public int tamanio();
 
 }
